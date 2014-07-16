@@ -2,7 +2,7 @@
 #
 # Version 0.1
 
-FROM ubuntu:quantal
+FROM ubuntu:trusty
 MAINTAINER Jannis Leidel "jannis@leidel.info"
 
 ENV DEBIAN_FRONTEND noninteractive
