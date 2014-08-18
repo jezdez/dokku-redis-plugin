@@ -52,7 +52,7 @@ case "$1" in
     VOLUME="$HOST_DIR:/opt/redis"
 
     # Launch container
-    docker run -v $VOLUME -name=$CONTAINER_NAME -d jezdez/redis \
+    docker run -v $VOLUME --name=$CONTAINER_NAME -d jezdez/redis \
         /usr/bin/redis-server /etc/redis/redis.conf
     # Link to a potential existing app
     dokku redis:link $APP $APP
