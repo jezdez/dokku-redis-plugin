@@ -15,8 +15,8 @@ if [[ $1 == redis:* ]]; then
             APP_EXISTS=false
         fi
     fi
-    if [[ ! -d "$PLUGIN_PATH/link" ]]; then
-        echo "Link plugin not found... Did you install it from https://github.com/rlaneve/dokku-link?"
+    if [[ ! -d "$PLUGIN_PATH/docker-options" ]]; then
+        echo "docker-options plugin not found... Did you install it from https://github.com/dyson/dokku-docker-options?"
         exit 1
     fi
 
@@ -75,7 +75,7 @@ case "$1" in
     
     if $APP_EXISTS; then
         # unlink this container as "redis"
-        dokku link:delete "$APP" "$CONTAINER_NAME" "$PLUGIN_NAME"
+        dokku docker-options:remove "$APP" "--link $CONTAINER_NAME:$PLUGIN_NAME"
         dokku config:unset "$APP" $ENVVAR_NAME
     fi
     echo "-----> Redis container deleted: $CONTAINER_NAME"
@@ -100,8 +100,8 @@ case "$1" in
         CONTAINER_NAME="${PLUGIN_NAME}_$3"
 
         # link this container as "redis"
-        dokku link:create "$APP" "$CONTAINER_NAME" "$PLUGIN_NAME"
-
+        dokku docker-options:add "$APP" "--link $CONTAINER_NAME:$PLUGIN_NAME"
+        
         # figure out IP to set env var
         ID=$(docker ps -a | grep "$CONTAINER_NAME" | awk '{print $1}')
         IP=$(docker inspect $ID | grep IPAddress | cut -d '"' -f 4)
