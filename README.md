@@ -11,8 +11,8 @@ git clone https://github.com/jezdez/dokku-redis-plugin redis
 dokku plugins-install
 ```
 
-This plugin also requires the dokku-redis-link plugin to be installed:
-https://github.com/rlaneve/dokku-link
+This plugin also requires the dokku-docker-options plugin to be installed:
+https://github.com/dyson/dokku-docker-options
 
 Commands
 --------
