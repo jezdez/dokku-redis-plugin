@@ -105,7 +105,7 @@ case "$1" in
         # figure out IP to set env var
         ID=$(docker ps -a | grep "$CONTAINER_NAME" | awk '{print $1}')
         IP=$(docker inspect $ID | grep IPAddress | cut -d '"' -f 4)
-        dokku config:set "$APP" $ENVVAR_NAME="redis://\$REDIS_PORT_6379_TCP_ADDR:\$REDIS_PORT_6379_TCP_PORT"
+        dokku config:set "$APP" $ENVVAR_NAME="redis://redis:6379"
         echo "-----> $APP linked to $CONTAINER_NAME container"
     fi
     ;;
